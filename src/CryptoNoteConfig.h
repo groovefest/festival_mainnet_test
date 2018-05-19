@@ -9,14 +9,14 @@ const uint64_t DIFFICULTY_TARGET                             = 120; // seconds
 const uint64_t CRYPTONOTE_MAX_BLOCK_NUMBER                   = 500000000;
 const size_t   CRYPTONOTE_MAX_BLOCK_BLOB_SIZE                = 500000000;
 const size_t   CRYPTONOTE_MAX_TX_SIZE                        = 1000000000;
-const uint64_t CRYPTONOTE_PUBLIC_ADDRESS_BASE58_PREFIX       = 0xf5; // addresses start with "h"
-const size_t   CRYPTONOTE_MINED_MONEY_UNLOCK_WINDOW          = 6;
+const uint64_t CRYPTONOTE_PUBLIC_ADDRESS_BASE58_PREFIX       = 0xe9; // addresses start with "f"
+const size_t   CRYPTONOTE_MINED_MONEY_UNLOCK_WINDOW          = 10;
 const uint64_t CRYPTONOTE_BLOCK_FUTURE_TIME_LIMIT            = 500;
 
 const size_t   BLOCKCHAIN_TIMESTAMP_CHECK_WINDOW             = 11;
 
 // MONEY_SUPPLY - total number coins to be generated
-const uint64_t MONEY_SUPPLY                                  = UINT64_C(858986905600000000);
+const uint64_t MONEY_SUPPLY                                  = UINT64_C(18446744073709551615);
 const uint64_t TAIL_EMISSION_REWARD                          = UINT64_C(10000000000);
 const size_t CRYPTONOTE_COIN_VERSION                         = 1;
 const unsigned EMISSION_SPEED_FACTOR                         = 19;
@@ -29,7 +29,7 @@ const size_t   CRYPTONOTE_BLOCK_GRANTED_FULL_REWARD_ZONE_V1  = 100000;
 const size_t   CRYPTONOTE_BLOCK_GRANTED_FULL_REWARD_ZONE_CURRENT = CRYPTONOTE_BLOCK_GRANTED_FULL_REWARD_ZONE;
 const size_t   CRYPTONOTE_COINBASE_BLOB_RESERVED_SIZE        = 600;
 const size_t   CRYPTONOTE_DISPLAY_DECIMAL_POINT              = 8;
-const uint64_t MINIMUM_FEE                                   = 100000; // for now Minimum fee would be 0.001 PARS for a while 
+const uint64_t MINIMUM_FEE                                   = 100000; // for now Minimum fee would be 0.001 PARS for a while
 const uint64_t DEFAULT_DUST_THRESHOLD                        = 100000000;
 const uint64_t MAX_TX_MIXIN_SIZE                             = 20;
 
@@ -56,8 +56,8 @@ const size_t   FUSION_TX_MAX_SIZE                            = CRYPTONOTE_BLOCK_
 const size_t   FUSION_TX_MIN_INPUT_COUNT                     = 12;
 const size_t   FUSION_TX_MIN_IN_OUT_COUNT_RATIO              = 4;
 
-const uint32_t UPGRADE_HEIGHT_V2                             = 30000; // Diff algo Change from cryptonote default to lwma
-const uint32_t UPGRADE_HEIGHT_V3                             = 32025; // POW algo Change from cryptonote default to cnv7 Anti ASIC
+const uint32_t UPGRADE_HEIGHT_V2                             = 1; // Diff algo Change from cryptonote default to lwma
+const uint32_t UPGRADE_HEIGHT_V3                             = 2; // POW algo Change from cryptonote default to cnv7 Anti ASIC
 const unsigned UPGRADE_VOTING_THRESHOLD                      = 90; // percent
 const uint32_t UPGRADE_VOTING_WINDOW                         = EXPECTED_NUMBER_OF_BLOCKS_PER_DAY;  // blocks
 const uint32_t UPGRADE_WINDOW                                = EXPECTED_NUMBER_OF_BLOCKS_PER_DAY;  // blocks
@@ -73,8 +73,8 @@ const char     CRYPTONOTE_BLOCKCHAIN_INDICES_FILENAME[]      = "blockchainindice
 const char     MINER_CONFIG_FILE_NAME[]                      = "miner_conf.json";
 } // parameters
 
-const char     CRYPTONOTE_NAME[]                             = "parsicoin";
-const char     GENESIS_COINBASE_TX_HEX[]                     = "010601ff0001e08785bcd72f029b2e4c0281c0b02e7c53291a94d1d0cbff8883f8024f5142ee494ffbbd08807121019896bb8cf57b63bf7f645844f57865ecbf38822b86cf67e2dae4bf1d8fb0a8b5";
+const char     CRYPTONOTE_NAME[]                             = "festival";
+const char     GENESIS_COINBASE_TX_HEX[]                     = "010a01ff000101029b2e4c0281c0b02e7c53291a94d1d0cbff8883f8024f5142ee494ffbbd088071210134b7c2f4925dbba1e22e35826b5d8bda13f326eceed445c8f9a3f149130c0e4a";
 
 const uint8_t  CURRENT_TRANSACTION_VERSION                   =  1;
 const uint8_t  BLOCK_MAJOR_VERSION_1                         =  1;
@@ -87,8 +87,8 @@ const size_t   BLOCKS_IDS_SYNCHRONIZING_DEFAULT_COUNT        =  10000;  //by def
 const size_t   BLOCKS_SYNCHRONIZING_DEFAULT_COUNT            =  200;    //by default, blocks count in blocks downloading
 const size_t   COMMAND_RPC_GET_BLOCKS_FAST_MAX_COUNT         =  1000;
 
-const int      P2P_DEFAULT_PORT                              =  17230;
-const int      RPC_DEFAULT_PORT                              =  18230;
+const int      P2P_DEFAULT_PORT                              =  8348;
+const int      RPC_DEFAULT_PORT                              =  8349;
 
 const size_t   P2P_LOCAL_WHITE_PEERLIST_LIMIT                =  1000;
 const size_t   P2P_LOCAL_GRAY_PEERLIST_LIMIT                 =  5000;
@@ -108,12 +108,11 @@ const uint32_t P2P_IP_BLOCKTIME                              = (60 * 60 * 24);//
 const uint32_t P2P_IP_FAILS_BEFORE_BLOCK                     = 10;
 const uint32_t P2P_IDLE_CONNECTION_KILL_INTERVAL             = (5 * 60);      //5 minutes
 
-const char     P2P_STAT_TRUSTED_PUB_KEY[]                    = "8f80f9a5a434a9f1510d13336228debfee9c918ce505efe225d8c94d045fa115";
+const char     P2P_STAT_TRUSTED_PUB_KEY[]                    = "233223322334a9f1510d13336228debfee9c918ce505efe225d8c94d045fa115";
 
 const char* const SEED_NODES[] = { 
-  "seednode1.parsicoin.net:17230",
-  "seednode2.parsicoin.net:17230",
-  "seednode3.parsicoin.net:17230",
+  "159.89.23.70:8348",
+  "178.62.223.187:8348",
 };
 
 struct CheckpointData {
@@ -122,13 +121,7 @@ struct CheckpointData {
 };
 
 const std::initializer_list<CheckpointData> CHECKPOINTS = { 
-  {5000,	"3ac6a64e54c4d5ea39306a448ee029d0d4951905d4805c75136339c7c856fbf3" },
-  {10000,	"6df47fd2acf43f49e0822399f8593039bffd5656c00c91497dca7789eb168f14" },
-  {15000,	"b0dac27b747f9d090dc49c2ea9a5e8434a74df7ae6118d6ccd83c6235f7e95c7" },
-  {20000,	"6c2c66c328d892caff8c97f61c7876a4af130c41ba8ea035315126d81a87f6c4" },
-  {25000,	"8625ba6a57ba368576a7e28c61d721886a1f460164016173e2d5f5e364649a01" },
-  {30000,	"adc73e2a9b88f73e64ced74230e893707fb5858a6e307cf854809c9dc071f2fd" },
-  {35000,	"7d1a4d342f35072f5d999afdc9845111764ccc4aec1afd0e47af883f25d0e4b1" },
+
 };
 
 } // CryptoNote
