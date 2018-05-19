@@ -16,8 +16,8 @@ const uint64_t CRYPTONOTE_BLOCK_FUTURE_TIME_LIMIT            = 500;
 const size_t   BLOCKCHAIN_TIMESTAMP_CHECK_WINDOW             = 11;
 
 // MONEY_SUPPLY - total number coins to be generated
-const uint64_t MONEY_SUPPLY                                  = UINT64_C(18446744073709551615);
-const uint64_t TAIL_EMISSION_REWARD                          = UINT64_C(10000000000);
+const uint64_t MONEY_SUPPLY                                  = UINT64_C(1844674407370955);
+const uint64_t TAIL_EMISSION_REWARD                          = 0;
 const size_t CRYPTONOTE_COIN_VERSION                         = 1;
 const unsigned EMISSION_SPEED_FACTOR                         = 19;
 static_assert(EMISSION_SPEED_FACTOR <= 8 * sizeof(uint64_t), "Bad EMISSION_SPEED_FACTOR");
@@ -74,7 +74,7 @@ const char     MINER_CONFIG_FILE_NAME[]                      = "miner_conf.json"
 } // parameters
 
 const char     CRYPTONOTE_NAME[]                             = "festival";
-const char     GENESIS_COINBASE_TX_HEX[]                     = "010a01ff0001ffffffffffff07029b2e4c0281c0b02e7c53291a94d1d0cbff8883f8024f5142ee494ffbbd08807121013c131374cb0bb841422955f96ba88a34b30c4be08799095948fb0d36ad158c0f";
+const char     GENESIS_COINBASE_TX_HEX[]                     = "";
 
 const uint8_t  CURRENT_TRANSACTION_VERSION                   =  1;
 const uint8_t  BLOCK_MAJOR_VERSION_1                         =  1;
