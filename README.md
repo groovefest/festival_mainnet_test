@@ -1,8 +1,8 @@
 Website :
 
-https://parsicoin.net
+https://festivalcoin.net
 
--= Building ParsiCoin =-
+-= Building festival =-
 
 On *nix:
 
