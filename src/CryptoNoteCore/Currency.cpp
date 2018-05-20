@@ -152,7 +152,7 @@ namespace CryptoNote {
         }
 
         if (alreadyGeneratedCoins == 1) {
-            baseReward =m_moneySupply*0.10;
+            baseReward =m_moneySupply*0.07;
         }
 
      if (alreadyGeneratedCoins + baseReward >= m_moneySupply) {
