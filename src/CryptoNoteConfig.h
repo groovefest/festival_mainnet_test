@@ -58,7 +58,8 @@ const size_t   FUSION_TX_MIN_IN_OUT_COUNT_RATIO              = 4;
 
 const uint32_t UPGRADE_HEIGHT_V2                             = 1; // Diff algo Change from cryptonote default to lwma
 const uint32_t UPGRADE_HEIGHT_V3                             = 2; // POW algo Change from cryptonote default to cnv7 Anti ASIC
-const unsigned UPGRADE_VOTING_THRESHOLD                      = 90; // percent
+const uint32_t UPGRADE_HEIGHT_V4                             = 70000; // POW algo Change from cnv7 to cn-fest
+const unsigned UPGRADE_VOTING_THRESHOLD                      = 80; // percent
 const uint32_t UPGRADE_VOTING_WINDOW                         = EXPECTED_NUMBER_OF_BLOCKS_PER_DAY;  // blocks
 const uint32_t UPGRADE_WINDOW                                = EXPECTED_NUMBER_OF_BLOCKS_PER_DAY;  // blocks
 static_assert(0 < UPGRADE_VOTING_THRESHOLD && UPGRADE_VOTING_THRESHOLD <= 100, "Bad UPGRADE_VOTING_THRESHOLD");
@@ -80,6 +81,7 @@ const uint8_t  CURRENT_TRANSACTION_VERSION                   =  1;
 const uint8_t  BLOCK_MAJOR_VERSION_1                         =  1;
 const uint8_t  BLOCK_MAJOR_VERSION_2                         =  2;
 const uint8_t  BLOCK_MAJOR_VERSION_3                         =  3;
+const uint8_t  BLOCK_MAJOR_VERSION_4                         =  4;
 const uint8_t  BLOCK_MINOR_VERSION_0                         =  0;
 const uint8_t  BLOCK_MINOR_VERSION_1                         =  1;
 
@@ -132,6 +134,9 @@ const std::initializer_list<CheckpointData> CHECKPOINTS = {
   {36000, "0cc84804222c7ad7aed8d7cc3a59e37459c9b5c5044e0ed70e9357163dcb82af" },
   {37000, "21a7b356f639cf8c8fda69dbbf4a0033881cf34f4c6e55b7e948172fea2a3a73" },
   {38850, "1a8c163011831e9eaeac9926a9af827739f812cffc7d376130df056e0a306bb7" },
+  {40000, "ae918ffff41902805f92271d314e5ddd454e3c0e987e6d40234beeadd20aa924" },
+  {50000, "0dfe11da2462a35c6cc75823cf0d311a3fcd850a930d72d292a1584626fcfcab" },
+  {55000, "f000524027b79c1ff7c30152d27fb5b65feaba22cc15f501da3356c8a38c81e7" },
 };
 
 } // CryptoNote

@@ -1,5 +1,5 @@
 // Copyright (c) 2012-2016, The CryptoNote developers, The Bytecoin developers
-// Copyright (c) 2018 The Parsicoin developers
+// Copyright (c) 2018 The FestivalCoin developers
 //
 // Bytecoin is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Lesser General Public License as published by
@@ -54,11 +54,12 @@ namespace Crypto {
   private:
 
     void *data;
-    friend inline void cn_slow_hash(cn_context &, const void *, size_t, Hash &, int);
+    //friend inline void cn_slow_hash(cn_context &, const void *, size_t, Hash &, int);
+	friend inline void cn_slow_hash(cn_context &, const void *, size_t, Hash &, int);
   };
 
   inline void cn_slow_hash(cn_context &context, const void *data, size_t length, Hash &hash, int variant = 0) {
-	cn_slow_hash(data, length, reinterpret_cast<char *>(&hash), variant);
+	  (*cn_slow_hash_f)(context.data, data, length, reinterpret_cast<void *>(&hash), variant);
   }
 
   inline void tree_hash(const Hash *hashes, size_t count, Hash &root_hash) {
