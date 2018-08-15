@@ -721,7 +721,7 @@ namespace CryptoNote {
 			offset = m_blocks.size() - std::min(m_blocks.size(), static_cast<uint64_t>(m_currency.difficultyBlocksCount3()));
 		}
 		else {
-			offset = m_blocks.size() - std::min(m_blocks.size(), static_cast<uint64_t>(m_currency.difficultyBlocksCount3()));
+			offset = m_blocks.size() - std::min(m_blocks.size(), static_cast<uint64_t>(m_currency.difficultyBlocksCount()));
 		}
 
 		if (offset == 0) {
