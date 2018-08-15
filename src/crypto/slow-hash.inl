@@ -201,7 +201,7 @@ cn_slow_hash_noaesni
 
 	VARIANT1_2(dst + 1);
 
-	if (variant > 2) // RTO Variant
+	if (variant > 2) // FEST Variant
 	{
 		*(dst + 1) ^= *(dst);
 	}
