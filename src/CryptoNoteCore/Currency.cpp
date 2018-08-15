@@ -79,7 +79,7 @@ namespace CryptoNote {
 			//m_upgradeHeightV3 = static_cast<uint32_t>(-1);
 			m_upgradeHeightV2 = 1;
 			m_upgradeHeightV3 = 2;
-			m_upgradeHeightV4 = 3;
+			m_upgradeHeightV4 = 4;
 			m_blocksFileName = "testnet_" + m_blocksFileName;
 			m_blocksCacheFileName = "testnet_" + m_blocksCacheFileName;
 			m_blockIndexesFileName = "testnet_" + m_blockIndexesFileName;
