@@ -23,7 +23,7 @@ cn_slow_hash_noaesni
 #endif
 (void *restrict context, const void *restrict data, size_t length, void *restrict hash, int variant)
 {
-//#define ctx ((struct cn_ctx *) context)
+	//#define ctx ((struct cn_ctx *) context)
 	struct cn_ctx* ctx = (struct cn_ctx *)context;
 
 	ALIGNED_DECL(uint8_t ExpandedKey[256], 16);
