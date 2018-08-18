@@ -581,7 +581,7 @@ namespace CryptoNote {
 		
 		// minimum limit
 		if (next_difficulty < 100000) {
-			next_difficulty = 1000;
+			next_difficulty = 1;
 		}
 
 		return next_difficulty;
