@@ -79,7 +79,7 @@ namespace CryptoNote {
 			//m_upgradeHeightV3 = static_cast<uint32_t>(-1);
 			m_upgradeHeightV2 = 1;
 			m_upgradeHeightV3 = 2;
-			m_upgradeHeightV4 = 4;
+			m_upgradeHeightV4 = 3;
 			m_blocksFileName = "testnet_" + m_blocksFileName;
 			m_blocksCacheFileName = "testnet_" + m_blocksCacheFileName;
 			m_blockIndexesFileName = "testnet_" + m_blockIndexesFileName;
@@ -422,7 +422,10 @@ namespace CryptoNote {
 	difficulty_type Currency::nextDifficulty(uint8_t blockMajorVersion, std::vector<uint64_t> timestamps,
 		std::vector<difficulty_type> cumulativeDifficulties) const {
 
-		if (blockMajorVersion >= BLOCK_MAJOR_VERSION_3) {
+		if(blockMajorVersion >= BLOCK_MAJOR_VERSION_4){
+			return nextDifficultyV4(timestamps, cumulativeDifficulties);
+		}
+		else if (blockMajorVersion >= BLOCK_MAJOR_VERSION_3) {
 			return nextDifficultyV3(timestamps, cumulativeDifficulties);
 		}
 		else if (blockMajorVersion == BLOCK_MAJOR_VERSION_2) {
@@ -581,10 +584,56 @@ namespace CryptoNote {
 		
 		// minimum limit
 		if (next_difficulty < 100000) {
-			next_difficulty = 1;
+			next_difficulty = 100000;
 		}
 
 		return next_difficulty;
+	}
+
+	difficulty_type Currency::nextDifficultyV4(std::vector<uint64_t> timestamps,
+		std::vector<difficulty_type> cumulativeDifficulties) const {
+
+		// new difficulty calculation
+		// next Diff = Avg past N Diff * TargetInterval / Avg past N solve times
+		// as described at https://github.com/monero-project/research-lab/issues/3
+		// Window time span and total difficulty is taken instead of average as suggested by Eugene
+
+		const int64_t T = static_cast<int64_t>(m_difficultyTarget);
+		const size_t N = CryptoNote::parameters::DIFFICULTY_WINDOW_V3 - 1;
+
+		if (timestamps.size() > N + 1) {
+			timestamps.resize(N + 1);
+			cumulativeDifficulties.resize(N + 1);
+		}
+
+		size_t n = timestamps.size();
+		assert(n == cumulativeDifficulties.size());
+		assert(n <= CryptoNote::parameters::DIFFICULTY_WINDOW_V3);
+		if (n <= 1)
+			return 1;
+
+		//logger(INFO) << "new diff...";
+		sort(timestamps.begin(), timestamps.end());
+
+		uint64_t timeSpan = timestamps.back() - timestamps.front();
+		if (timeSpan == 0) {
+			timeSpan = 1;
+		}
+
+		difficulty_type totalWork = cumulativeDifficulties.back() - cumulativeDifficulties.front();
+		assert(totalWork > 0); 
+
+		uint64_t low, high;
+		low = mul128(totalWork, m_difficultyTarget, &high);
+		// blockchain error "Difficulty overhead" if this function returns zero
+		if (high != 0) {
+			logger(ERROR) << "blockchain error 'Difficulty overhead'...";
+			return 0;
+		}
+
+		uint64_t nextDiffZ = low / timeSpan;
+
+		return nextDiffZ;
 	}
 
 	bool Currency::checkProofOfWorkV1(Crypto::cn_context& context, const Block& block, difficulty_type currentDiffic,
