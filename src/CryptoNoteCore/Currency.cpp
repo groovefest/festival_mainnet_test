@@ -568,7 +568,9 @@ namespace CryptoNote {
 		uint64_t difficulty(0), next_difficulty(0);
 
 		// Loop through N most recent blocks.
-		for (int64_t i = 1; i <= N; i++) {
+		int64_t loopLen = (n < N) ? n : N;
+
+		for (int64_t i = 1; i <= loopLen; i++) {
 			solveTime = static_cast<int64_t>(timestamps[i]) - static_cast<int64_t>(timestamps[i - 1]);
 			solveTime = std::min<int64_t>((T * 7), std::max<int64_t>(solveTime, (-7 * T)));
 			difficulty = cumulativeDifficulties[i] - cumulativeDifficulties[i - 1];
