@@ -201,6 +201,7 @@ private:
   static const std::vector<uint64_t> PRETTY_AMOUNTS;
 
   bool m_testnet;
+  bool rt_testnet_state;
 
   Block m_genesisBlock;
   Crypto::Hash m_genesisBlockHash;

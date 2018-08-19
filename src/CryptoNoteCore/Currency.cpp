@@ -64,6 +64,7 @@ namespace CryptoNote {
 	};
 
 	bool Currency::init() {
+		rt_testnet_state = false;
 		if (!generateGenesisBlock()) {
 			logger(ERROR, BRIGHT_RED) << "Failed to generate genesis block";
 			return false;
@@ -77,9 +78,10 @@ namespace CryptoNote {
 		if (isTestnet()) {
 			//m_upgradeHeightV2 = 0;
 			//m_upgradeHeightV3 = static_cast<uint32_t>(-1);
+			rt_testnet_state = isTestnet();
 			m_upgradeHeightV2 = 1;
 			m_upgradeHeightV3 = 2;
-			m_upgradeHeightV4 = 3;
+			m_upgradeHeightV4 = 4;
 			m_blocksFileName = "testnet_" + m_blocksFileName;
 			m_blocksCacheFileName = "testnet_" + m_blocksCacheFileName;
 			m_blockIndexesFileName = "testnet_" + m_blockIndexesFileName;
@@ -154,16 +156,16 @@ namespace CryptoNote {
 
 		uint64_t baseReward = (m_moneySupply - alreadyGeneratedCoins) >> m_emissionSpeedFactor;
 		if (alreadyGeneratedCoins == 0) {
-            baseReward = 1;
-        }
+			baseReward = 1;
+		}
 
-        if (alreadyGeneratedCoins == 1) {
-            baseReward =m_moneySupply*0.07;
-        }
+		if (alreadyGeneratedCoins == 1) {
+			baseReward = m_moneySupply*0.07;
+		}
 
-     if (alreadyGeneratedCoins + baseReward >= m_moneySupply) {
-                baseReward = 0;
-            }
+		if (alreadyGeneratedCoins + baseReward >= m_moneySupply) {
+			baseReward = 0;
+		}
 
 		size_t blockGrantedFullRewardZone = blockGrantedFullRewardZoneByBlockVersion(blockMajorVersion);
 		medianSize = std::max(medianSize, blockGrantedFullRewardZone);
@@ -422,7 +424,7 @@ namespace CryptoNote {
 	difficulty_type Currency::nextDifficulty(uint8_t blockMajorVersion, std::vector<uint64_t> timestamps,
 		std::vector<difficulty_type> cumulativeDifficulties) const {
 
-		if(blockMajorVersion >= BLOCK_MAJOR_VERSION_4){
+		if (blockMajorVersion >= BLOCK_MAJOR_VERSION_4) {
 			return nextDifficultyV4(timestamps, cumulativeDifficulties);
 		}
 		else if (blockMajorVersion >= BLOCK_MAJOR_VERSION_3) {
@@ -437,7 +439,7 @@ namespace CryptoNote {
 	}
 
 	difficulty_type Currency::nextDifficultyV1(std::vector<uint64_t> timestamps,
-				std::vector<difficulty_type> cumulativeDifficulties) const {
+		std::vector<difficulty_type> cumulativeDifficulties) const {
 		assert(m_difficultyWindow >= 2);
 
 		if (timestamps.size() > m_difficultyWindow) {
@@ -581,7 +583,14 @@ namespace CryptoNote {
 		harmonic_mean_D = N / sum_inverse_D * adjust;
 		nextDifficulty = harmonic_mean_D * T / LWMA;
 		next_difficulty = static_cast<uint64_t>(nextDifficulty);
-		
+
+		// minimum limit
+		if (next_difficulty < 100000) {
+			if (rt_testnet_state)
+				next_difficulty = 10;
+			else
+				next_difficulty = 100000;
+		}
 
 		return next_difficulty;
 	}
@@ -617,7 +626,7 @@ namespace CryptoNote {
 		}
 
 		difficulty_type totalWork = cumulativeDifficulties.back() - cumulativeDifficulties.front();
-		assert(totalWork > 0); 
+		assert(totalWork > 0);
 
 		uint64_t low, high;
 		low = mul128(totalWork, m_difficultyTarget, &high);
