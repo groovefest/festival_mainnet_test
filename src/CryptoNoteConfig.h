@@ -59,7 +59,7 @@ const size_t   FUSION_TX_MIN_IN_OUT_COUNT_RATIO              = 4;
 
 const uint32_t UPGRADE_HEIGHT_V2                             = 1; // Diff algo Change from cryptonote default to lwma
 const uint32_t UPGRADE_HEIGHT_V3                             = 2; // POW algo Change from cryptonote default to cnv7 Anti ASIC
-const uint32_t UPGRADE_HEIGHT_V4                             = 70000; // POW algo Change from cnv7 to cn-fest
+const uint32_t UPGRADE_HEIGHT_V4                             = 50; // POW algo Change from cnv7 to cn-fest
 const unsigned UPGRADE_VOTING_THRESHOLD                      = 80; // percent
 const uint32_t UPGRADE_VOTING_WINDOW                         = EXPECTED_NUMBER_OF_BLOCKS_PER_DAY;  // blocks
 const uint32_t UPGRADE_WINDOW                                = EXPECTED_NUMBER_OF_BLOCKS_PER_DAY;  // blocks
