@@ -425,7 +425,7 @@ namespace CryptoNote {
 		std::vector<difficulty_type> cumulativeDifficulties) const {
 
 		if (blockMajorVersion >= BLOCK_MAJOR_VERSION_4) {
-			return nextDifficultyV4(timestamps, cumulativeDifficulties);
+			return nextDifficultyV2(timestamps, cumulativeDifficulties);
 		}
 		else if (blockMajorVersion >= BLOCK_MAJOR_VERSION_3) {
 			return nextDifficultyV3(timestamps, cumulativeDifficulties);
