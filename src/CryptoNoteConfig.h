@@ -76,7 +76,7 @@ const char     MINER_CONFIG_FILE_NAME[]                      = "miner_conf.json"
 } // parameters
 
 const char     CRYPTONOTE_NAME[]                             = "festival";
-const char     GENESIS_COINBASE_TX_HEX[]                     = "040a01ff000101029b2e4c0281c0b02e7c53291a94d1d0cbff8883f8024f5142ee494ffbbd0880712101b8473ff36f8bda3d065ab4c8685aa6ce73ad40c16532745a5e897e413704fb88";
+const char     GENESIS_COINBASE_TX_HEX[]                     = "010a01ff000101029b2e4c0281c0b02e7c53291a94d1d0cbff8883f8024f5142ee494ffbbd0880712101b8473ff36f8bda3d065ab4c8685aa6ce73ad40c16532745a5e897e413704fb88";
 
 const uint8_t  CURRENT_TRANSACTION_VERSION                   =  1;
 const uint8_t  BLOCK_MAJOR_VERSION_1                         =  1;
